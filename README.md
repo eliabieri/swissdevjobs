@@ -1,4 +1,4 @@
-# A simple CLI tool that scrapes the listings of swissdevjobs.ch
+# A simple CLI for swissdevjobs.ch
 
 ### Disclaimer
 This tool is not complete and only serves the needs that I had.  
