@@ -10,6 +10,7 @@ class JobPost(BaseModel):
     company: str
     cityCategory: str
     activeFrom: datetime
+    offerStockOrBonus: Optional[bool]
     technologies: list[str]
     redirectJobUrl: Optional[str]
     jobType: Optional[str]
@@ -31,11 +32,13 @@ def main():
     table.add_column("Active from")
     table.add_column("URL")
 
+
     for job in jobs:
+        name = f"{job.name} {'💎' if job.offerStockOrBonus else ''}"
         salary = f"{job.annualSalaryFrom} - {job.annualSalaryTo} CHF"
         activeFrom = job.activeFrom.strftime("%A %d. %B %H:%M")
         technologies = ", ".join(job.technologies)
-        table.add_row(job.name, job.company, job.cityCategory, salary, technologies, activeFrom, f"[link={job.redirectJobUrl}]Click 🔗[/link]")
+        table.add_row(name, job.company, job.cityCategory, salary, technologies, activeFrom, f"[link={job.redirectJobUrl}]Click 🔗[/link]")
 
     console = Console()
     console.print(table)
