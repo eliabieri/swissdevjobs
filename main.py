@@ -35,7 +35,7 @@ def main():
         salary = f"{job.annualSalaryFrom} - {job.annualSalaryTo} CHF"
         activeFrom = job.activeFrom.strftime("%A %d. %B %H:%M")
         technologies = ", ".join(job.technologies)
-        table.add_row(job.name, job.company, job.cityCategory, salary, technologies, activeFrom, "[link=job.redirectJobUrl]Click 🔗[/link]")
+        table.add_row(job.name, job.company, job.cityCategory, salary, technologies, activeFrom, f"[link={job.redirectJobUrl}]Click 🔗[/link]")
 
     console = Console()
     console.print(table)
