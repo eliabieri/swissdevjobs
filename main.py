@@ -24,7 +24,9 @@ def main():
     parttimeJobs = list(filter(lambda p: p.jobType == "Part-Time" ,jobs))
 
     bestPayingJob = max(jobs, key=lambda k: k.annualSalaryTo or 0)
-    table = Table(title=f"{len(parttimeJobs)} Part-Time Jobs.\nFun fact: The currently highest salary on swissdevjobs.ch is {bestPayingJob.annualSalaryTo} CHF ({bestPayingJob.name})")
+    funFact = f"Fun fact: The highest salary on swissdevjobs.ch currently is {bestPayingJob.annualSalaryTo} CHF ({bestPayingJob.name})"
+
+    table = Table(title=f"{len(parttimeJobs)} Part-Time Jobs.\n{funFact}")
     table.add_column("Name", justify="left", style="cyan", no_wrap=True)
     table.add_column("Company", justify="left", style="yellow", no_wrap=True)
     table.add_column("City", justify="left", style="green", no_wrap=True)
