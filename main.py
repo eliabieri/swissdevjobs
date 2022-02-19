@@ -21,9 +21,10 @@ def main():
     r = requests.get("https://swissdevjobs.ch/api/jobsLight")
     jobs = parse_raw_as(list[JobPost], r.text)
 
-    jobs = list(filter(lambda p: p.jobType == "Part-Time" ,jobs))
+    parttimeJobs = list(filter(lambda p: p.jobType == "Part-Time" ,jobs))
 
-    table = Table(title=f"{len(jobs)} Part-Time Jobs")
+    bestPayingJob = max(jobs, key=lambda k: k.annualSalaryTo or 0)
+    table = Table(title=f"{len(parttimeJobs)} Part-Time Jobs.\nFun fact: The currently highest salary on swissdevjobs.ch is {bestPayingJob.annualSalaryTo} CHF ({bestPayingJob.name})")
     table.add_column("Name", justify="left", style="cyan", no_wrap=True)
     table.add_column("Company", justify="left", style="yellow", no_wrap=True)
     table.add_column("City", justify="left", style="green", no_wrap=True)
@@ -33,7 +34,7 @@ def main():
     table.add_column("URL")
 
 
-    for job in jobs:
+    for job in parttimeJobs:
         name = f"{job.name} {'💎' if job.offerStockOrBonus else ''}"
         salary = f"{job.annualSalaryFrom} - {job.annualSalaryTo} CHF"
         activeFrom = job.activeFrom.strftime("%A %d. %B %H:%M")
